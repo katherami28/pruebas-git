@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 template="./WEB-INF/newTemplate.xhtml"
+                 xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:param name="title" value="Listado de Parques"/>
+    <ui:define name="content">
+        <p:panelGrid columns="1" >
+            <p:commandButton id="btnConsulta" value="#{bundle.BTN_TEXTS}" icon="ui-icon-star"
+                             actionListener="#{parquesView.consultaParques()}" update="tablaParques"/>
+            <p:button id="btnCrear"  icon="ui-icon-star" outcome="Parquescreate" value="#{bundle.BTN_TEXTC}">
+                                 <f:param name="code" value="#{item.id}"/>
+             </p:button>
+                
+                    
+<p:spacer width="100" height="10" />               
+
+<p:dataTable var="item" value="#{parquesView.parques}" id="tablaParques"
+                                 paginator="true" rows="5" scrollable="true"
+				scrollWidth="100%"  emptyMessage="No se encontraron registros" 
+                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5,10,15,100">
+                        <p:column headerText="#{bundle.COL__ID_HEADER_TEXT}">
+                            <h:outputText value="#{item.id}" />
+                        </p:column>
+
+                        <p:column headerText="#{bundle.COL__NAME_HEADER_TEXT}">
+                            <h:outputText value="#{item.nombre}" />
+                        </p:column>
+
+                        <p:column headerText="#{bundle.COL__STATE_HEADER_TEXT}">
+                            <h:outputText value="#{item.state}" />
+                        </p:column>
+
+                        <p:column headerText="#{bundle.COL__CAPACITY_HEADER_TEXT}">
+                            <h:outputText value="#{item.capacity}" />
+                        </p:column>
+                       
+                        <p:column headerText="#{bundle.COL__STATUS_HEADER_TEXT}">
+                            <h:outputText value="#{item.status}" />
+                        </p:column>
+
+                         <p:column style="width:100px;text-align: center" headerText="#{bundle.COL__EDIT_HEADER_TEXT}">
+                             <p:button id="btnEdiPq" outcome="Parquesedit" icon="fa fa-edit">
+                                 <f:param name="action" value="edit"/>
+                                 <f:param name="code" value="#{item.id}"/>
+                             </p:button>
+                        </p:column>
+                         <p:column style="width:100px;text-align: center" headerText="#{bundle.COL__DELETE_HEADER_TEXT}">
+                             <p:commandButton id="btnDelPq"  actionListener="#{parquesView.eliminarParque(item.id)}" icon="fa fa-edit"/>
+                         </p:column>
+                    </p:dataTable>
+
+</p:panelGrid>
+    </ui:define>
+
+</ui:composition>

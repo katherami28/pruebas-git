@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 template="./WEB-INF/newTemplate.xhtml"
+                 xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:param name="title" value="Parques"/>
+    <f:metadata>
+        <f:viewParam name="code" value="#{parquesEditView.seletedId}"/>
+        <f:event type="preRenderView" listener="#{parquesEditView.init()}"/>
+    </f:metadata>
+    <ui:define name="content">
+        <h:panelGrid columns="2" cellpadding="5">
+        
+
+            <h:outputLabel for="txtCode" value="#{bundle.COL__ID_HEADER_TEXT}"/>
+            <p:inputText id="txtCode" required="true" value="#{parquesEditView.seletedPark.id}"/>
+
+            <h:outputLabel for="txtName" value="#{bundle.COL__NAME_HEADER_TEXT}"/>
+            <p:inputText id="txtName" required="true" value="#{parquesEditView.seletedPark.nombre}"/> 
+
+            <h:outputLabel for="txtColor" value="#{bundle.COL__STATE_HEADER_TEXT}"/>
+            <p:inputText id="txtColor" required="true" value="#{parquesEditView.seletedPark.state}"/>
+
+            <h:outputLabel for="txtFecha" value="#{bundle.COL__CAPACITY_HEADER_TEXT}"/>
+            <p:inputText id="txtFecha" required="true" value="#{parquesEditView.seletedPark.capacity}"/>
+
+            <h:outputLabel for="txtDT" value="#{bundle.COL__STATUS_HEADER_TEXT}"/>
+            <p:inputText id="txtDT" required="true" value="#{parquesEditView.seletedPark.status}"/>
+
+            <p:spacer width="1" height="15"/>
+            <f:facet name="footer">
+                <p:button outcome="ParquesView" icon="fa fa-backward" value="Volver"/>
+            </f:facet>
+         </h:panelGrid>
+    </ui:define>
+
+</ui:composition>
